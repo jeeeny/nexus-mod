@@ -576,8 +576,8 @@ body {
 /* ===== 卡片 ===== */
 .mod-card {
   
-  width: 225px;
-  flex: 0 0 225px;
+  width: 200px;
+  flex: 0 0 200px;
 
   background: white;
   border-radius: 8px;
