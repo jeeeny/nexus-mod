@@ -84,6 +84,9 @@ function renderMods(list) {
       <p class="tags">标签：<span class="tag-list">${tagsHTML || "-"}</span></p>
       
     `;
+    card.addEventListener("click", () => {
+    card.classList.toggle("expanded");
+  });
 
     container.appendChild(card);
   });
