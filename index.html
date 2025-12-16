@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mod 管理器</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- ☰ 菜单按钮 -->
+  <button id="menuBtn" class="menu-btn">☰</button>
+
+  <!-- 侧边栏 -->
+  <div id="sideDrawer" class="side-drawer">
+    <h3>⭐ 收藏</h3>
+    <ul id="favoriteList" class="fav-list"></ul>
+    <button id="drawerCloseBtn">关闭</button>
+  </div>
+
+  <!-- 遮罩 -->
+  <div id="drawerMask"></div>
+
+  <!-- 顶部冻结区域 -->
+  <div id="topControlsWrapper" class="sticky-top">
+    <div class="container">
+      <h1>Mod 管理器</h1>
+
+      <!-- 搜索框 -->
+      <div id="topControls">
+        <input type="text" id="search" placeholder="搜索：中文 / 英文 / 尾号 / 标签" />
+      </div>
+
+      <!-- 标签栏 -->
+      <div id="tagContainer" class="tag-bar"></div>
+    </div>
+  </div>
+
+  <!-- Mod 卡片容器（滚动） -->
+  <div id="modContainer" class="container"></div>
+
+  <!-- 主逻辑 JS -->
+  <script src="script.js"></script>
+</body>
+</html>
