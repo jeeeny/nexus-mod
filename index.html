@@ -8,8 +8,7 @@
 </head>
 
 <body>
-  <!-- ☰ 菜单按钮 -->
-  <button id="menuBtn" class="menu-btn">☰</button>
+  
 
   <!-- 侧边栏 -->
   <div id="sideDrawer" class="side-drawer">
@@ -24,15 +23,19 @@
   <!-- 顶部冻结区域 -->
   <div id="topControlsWrapper" class="sticky-top">
     <div class="container">
-      <h1>Mod 管理器</h1>
+      <!-- 顶部第一行：菜单 + 标题 -->
+      <div class="top-row" style="display: flex; align-items: center;">
+        <button id="menuBtn" class="menu-btn">☰</button>
+        <h1 style="margin: 0 0 0 10px;">Mod 管理器</h1>
+      </div>
 
-      <!-- 搜索框 -->
-      <div id="topControls">
+      <!-- 顶部第二行：搜索框 -->
+      <div id="topControls" style="margin-top: 8px;">
         <input type="text" id="search" placeholder="搜索：中文 / 英文 / 尾号 / 标签" />
       </div>
 
       <!-- 标签栏 -->
-      <div id="tagContainer" class="tag-bar"></div>
+      <div id="tagContainer" class="tag-bar" style="margin-top: 8px;"></div>
     </div>
   </div>
 

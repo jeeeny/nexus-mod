@@ -31,10 +31,12 @@ body {
   border-bottom: none;
 }
 
+/* 搜索框占满宽度，和 Mod 卡片左对齐 */
 #topControls input {
-  flex: 1;
-  min-width: 200px;
-  padding: 6px 8px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 6px 10px;
   font-size: 16px;
 }
 
@@ -202,16 +204,33 @@ body {
   font-size: 14px;
 }
 
-/* ===== 左上角菜单按钮 ===== */
+
+
+#topControlsWrapper {
+  position: relative; /* 绝对定位的参考容器 */
+}
+
 .menu-btn {
-  position: fixed;
-  top: 16px;
-  left: 16px;
-  z-index: 300;
   font-size: 22px;
   background: none;
   border: none;
   cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+/* 搜索框和 Mod 管理器左边线对齐 */
+#topControls input {
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+}
+
+/* 保证 container 左边对齐 */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
 }
 
 /* ===== 遮罩 ===== */
@@ -448,3 +467,225 @@ body {
   color: #ED974F;
   text-decoration: underline;
 }
+
+@media (max-width: 768px) {
+  #modContainer .mod-card {
+    flex: 0 0 calc(50% - 5px); /* 最少两列 */
+  }
+}
+
+@media (max-width: 480px) {
+  #modContainer .mod-card {
+    flex: 0 0 calc(33.33% - 4px); /* 三列 */
+  }
+}
+
+@media (max-width: 360px) {
+  #modContainer .mod-card {
+    flex: 0 0 calc(50% - 4px); /* 保证最小屏幕显示两列 */
+  }
+}
+
+#tagContainer {
+  max-height: 50px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+#tagContainer .tag-chip {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+
+/* ===== 外层容器 ===== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+/* ===== 顶部冻结区域 ===== */
+#topControlsWrapper {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #f9f9f9;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* 顶部第一行：菜单 + 标题 */
+.top-row {
+  display: flex;
+  align-items: center;
+}
+
+.menu-btn {
+  font-size: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+.top-row h1 {
+  margin: 0 0 0 10px; /* 与菜单间距 */
+  font-size: 20px;
+}
+
+/* 顶部第二行：搜索框 */
+#topControls {
+  margin-top: 8px;
+}
+
+#topControls input {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 6px 10px;
+  font-size: 16px;
+}
+
+/* 标签栏 */
+#tagContainer {
+  margin-top: 8px;
+  max-height: 50px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+#tagContainer .tag-chip {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+/* ===== Mod 卡片容器 ===== */
+#modContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* ===== 卡片 ===== */
+.mod-card {
+  flex: 1 1 200px;
+  max-width: 220px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.15);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease;
+}
+
+.mod-card:hover {
+  transform: translateY(-4px);
+}
+
+/* 缩略图 */
+.thumb {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 8px;
+}
+
+/* ===== 收藏按钮 + 标题 ===== */
+.mod-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.mod-card h3 {
+  font-size: 14px;
+  margin: 4px 0;
+  text-align: left;
+  flex: 1;
+}
+
+.fav-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.fav-btn:hover {
+  transform: scale(1.1);
+}
+
+/* ===== 文本 ===== */
+.mod-card p {
+  font-size: 13px;
+  margin: 3px 0;
+}
+
+.mod-desc {
+  color: #555;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mod-card:hover .mod-desc {
+  display: block;
+  white-space: normal;
+}
+
+/* 标签 */
+.tag {
+  display: inline-block;
+  background: #eee;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 11px;
+  margin-right: 4px;
+}
+
+.tag-chip {
+  display: inline-block;
+  background-color: #e0e0e0;
+  color: #333;
+  padding: 5px 10px;
+  border-radius: 15px;
+  margin: 5px 5px 5px 0;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.tag-chip.active {
+  background-color: #ED974F;
+  color: white;
+}
+
+/* 响应式：小屏幕 Mod 卡片 */
+@media (max-width: 768px) {
+  #modContainer .mod-card {
+    flex: 0 0 calc(50% - 5px);
+  }
+}
+
+@media (max-width: 480px) {
+  #modContainer .mod-card {
+    flex: 0 0 calc(33.33% - 4px);
+  }
+}
+
+@media (max-width: 360px) {
+  #modContainer .mod-card {
+    flex: 0 0 calc(50% - 4px);
+  }
+}
+
+
