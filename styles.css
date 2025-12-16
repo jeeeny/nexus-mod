@@ -568,7 +568,7 @@ body {
   display: flex;
   flex-wrap: wrap;/* 允许卡片换行 */
   gap: 10px;                               /* 卡片间距 */
-  justify-content: flex-start;                 /* 整体居中 */
+  justify-content: flex-start;                 /* 左对齐 */
   margin-top: 10px;
   padding-bottom: 20px;
 }
@@ -576,8 +576,8 @@ body {
 /* ===== 卡片 ===== */
 .mod-card {
   
-  width: 200px;
-  flex-shrink: 0;
+  width: 300px;
+  flex: 0 0 300px;
 
   background: white;
   border-radius: 8px;
@@ -636,6 +636,10 @@ body {
 .mod-card p {
   font-size: 13px;
   margin: 3px 0;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ===== 描述 ===== */
@@ -689,13 +693,13 @@ body {
 }
 
 /* 响应式：小屏幕 Mod 卡片 */
-@media (max-width: 768px) {
+@media (max-width: 650px) {
   /* #modContainer .mod-card {
     flex: 0 0 calc(50% - 5px);
   } */
    .mod-card{
-    flex: 0 0 calc(50% - 5px);
-    width: auto;
+    flex: 0 0 100%;
+    width: 100%;
     padding: 6px;
    }
    .thumb{
