@@ -27,15 +27,14 @@ body {
   top: 0;
   z-index: 1000;
   background: #f9f9f9;
-  padding: 10px 0;
+  margin: 0;
+  padding: 0;
   border-bottom: 1px solid #e0e0e0;
-}
-
-/* 顶部冻结区域 */
-#topControlsWrapper {
   border-bottom: none;
   position: relative; /* 绝对定位的参考容器 */
 }
+
+
 
 
 /* ===== 顶部控制区（冻结） ===== */
@@ -510,7 +509,7 @@ body {
 /* 外层容器固定顶部 */
 #topControlsWrapper {
   position: sticky;
-  top: 55px;
+  top: 40px; /* 距离上面顶部白边 */
   z-index: 1000;
   background: #f9f9f9;
   padding-top: 5px;
@@ -701,7 +700,7 @@ body {
   flex-wrap: wrap;
   gap: 10px;
   justify-content: flex-start;
-  padding-top: 38px; /* 避开顶部 */
+  padding-top: 25px; /* 距离顶部白边距离避开顶部 */
 }
 
 #modContainer {
