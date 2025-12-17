@@ -509,7 +509,7 @@ body {
 /* 外层容器固定顶部 */
 #topControlsWrapper {
   position: sticky;
-  top: 40px; /* 距离上面顶部白边 */
+  top: 20px; /* 距离上面白边 */
   z-index: 1000;
   background: #f9f9f9;
   padding-top: 5px;
@@ -700,7 +700,7 @@ body {
   flex-wrap: wrap;
   gap: 10px;
   justify-content: flex-start;
-  padding-top: 25px; /* 距离顶部白边距离避开顶部 */
+  padding-top: 5px; /* 距离顶部白边距离避开顶部 */
 }
 
 #modContainer {
