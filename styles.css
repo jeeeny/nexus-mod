@@ -77,20 +77,24 @@ body {
 
 
 
-/* ===== 标签栏 ===== */
+
+
+
+
+/* 标签栏 */
 #tagContainer {
-  margin-top:4px;
-  margin-bottom:1px;
+  max-height: 50px;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
-/* ===== Mod 卡片容器 ===== */
-#modContainer {
-  display: flex;
-  flex-wrap: wrap; /* 允许卡片换行 */
-  gap: 10px;
-  justify-content: flex-start;                 /* 左对齐 */
-  margin-top: 20px;
+#tagContainer .tag-chip {
+  display: inline-block;
+  margin-right: 5px;
 }
+
+
+
 
 
 /* ===== Mod 卡片容器 ===== */
@@ -104,7 +108,7 @@ body {
 } */
 
 /* ===== 非电脑设备：强制两列 ===== */
-@media (max-width: 1024px) {
+/* @media (max-width: 1024px) {
   #modContainer .mod-card {
     flex: 0 0 calc(50% - 5px);
   }
@@ -112,30 +116,25 @@ body {
 
 .mod-card {
   /* 没有宽度限制 */
-}
+/* }
 
 #modContainer.minimal h3 {
   font-size: 1.1em;
-}
+} */ 
 
 
 
 
-.mod-card:hover {
-  transform: translateY(-4px);
-}
+
 
 /* ===== 展开状态 ===== */
-.mod-card.expanded h3,
+/* .mod-card.expanded h3,
 .mod-card.expanded .mod-desc {
   -webkit-line-clamp: unset;
   overflow: visible;
-}
+} */
 
-.mod-card:hover .mod-desc {
-  display: block;
-  white-space: normal;
-}
+
 
 /* 缩略图 */
 .thumb {
@@ -177,9 +176,9 @@ body {
   cursor:pointer;
 }
 
-.mod-card:hover {
-  transform: translateY(-4px);
-}
+
+
+
 
 
 
@@ -190,13 +189,28 @@ body {
 .mod-card p {
   font-size: 13px;
   margin: 3px 0;
+
+  /* white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; */
 }
 
 /* 鼠标悬停显示完整内容 */
-.mod-card:hover .mod-desc {
+/* .mod-card:hover .mod-desc {
   display: block;
   white-space: normal;
-}
+} */
+
+/* .mod-card:hover {
+  transform: translateY(-4px);
+} */
+
+
+
+/* .mod-card:hover .mod-desc {
+  display: block;
+  white-space: normal;
+} */
 
 /* ===== 英文名 ===== */
 .mod-card h3 {
@@ -209,15 +223,28 @@ body {
   text-overflow: ellipsis;
 }
 
-/* ===== 文本 ===== */
-.mod-card p {
-  font-size: 13px;
-  margin: 3px 0;
-
+/* ===== 中文名 ===== */
+.mod-cn {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+/* ===== 作者 ===== */
+.mod-author {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===== 描述 ===== */
+.mod-desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* 显示两行 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 
 /* 收藏按钮 */
 .fav-btn {
@@ -306,6 +333,15 @@ body {
   cursor: pointer;
   padding: 0;
   margin: 0;
+
+  color: #ED974F;              /* 橙色 */
+  -webkit-tap-highlight-color: transparent; /* 干掉手机蓝色 */
+}
+
+.menu-btn:focus,
+.menu-btn:active {
+  color: #ED974F;
+  outline: none;
 }
 
 .menu-btn {
@@ -509,7 +545,7 @@ body {
 /* 外层容器固定顶部 */
 #topControlsWrapper {
   position: sticky;
-  top: 5px; /* 距离上面白边 */
+  top: 0px; /* 距离上面白边 */
   z-index: 1000;
   background: #f9f9f9;
   padding-top: 5px;
@@ -517,20 +553,10 @@ body {
   border-bottom: 1px solid #e0e0e0;
 }
 
-/* 标签栏 */
-#tagContainer {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
 
 
-.mod-desc {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2; /* 显示两行 */
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+
+
 
 
 
@@ -552,15 +578,7 @@ body {
 
 
 
-#tagContainer {
-  max-height: 50px;
-  overflow-x: auto;
-  white-space: nowrap;
-}
-#tagContainer .tag-chip {
-  display: inline-block;
-  margin-right: 5px;
-}
+
 
 
 
@@ -593,18 +611,6 @@ body {
   font-size: 16px;
 }
 
-/* 标签栏 */
-#tagContainer {
-  margin-top: 8px;
-  max-height: 50px;
-  overflow-x: auto;
-  white-space: nowrap;
-}
-
-#tagContainer .tag-chip {
-  display: inline-block;
-  margin-right: 5px;
-}
 
 
 
@@ -637,9 +643,10 @@ body {
   line-height: 1;
 }
 
-.fav-btn:hover {
+/*点击卡片浮现该有的两行多行描述英文名*/
+/* .fav-btn:hover {
   transform: scale(1.1);
-}
+} */
 
 
 
@@ -699,17 +706,20 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: flex-start;
-  padding-top: 0px; /* 距离顶部白边距离避开顶部 */
+  /* justify-content: flex-start; */
+  justify-content: space-between; /* 左右均分剩余空间 */
+  padding-top: 0px; /* 卡片距离顶部白边距离避开顶部 */
   min-height: calc(100vh - 120px); /* 最小高度 */
   height: calc(100vh - 200px); /* sticky 高度 120px */
   overflow-y: auto;
   align-content: flex-start;     /* 多行对齐，不拉满容器 */
+  margin-top: 10px;
 }
 
 
 .mod-card {
-  flex: 0 0 calc((100% - 10px - 20px) / 2); /* 100% - gap - padding*2 */
+  /* flex: 0 0 calc((100% - 10px - 20px) / 2); 100% - gap - padding*2 */
+  flex: 0 0 calc(50% - 5px); /* 50% - gap/2 */
   width: calc((100% - 10px - 20px) / 2);
   box-sizing: border-box;
 }
@@ -749,7 +759,13 @@ body {
   margin-bottom: 4px; /* tags 和灰线间距 */
 }
 
+#tagContainer .tag-chip {
+  display: inline-block;
+  margin-right: 5px;
+}
+
 #sideDrawer h3,
 #drawerCloseBtn {
   margin-left: 25px; /* 和 side-drawer 内边距一致 */
 }
+

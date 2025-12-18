@@ -219,7 +219,18 @@ function renderFavoriteDrawer() {
   list.innerHTML = "";
 
   const favs = getFavorites();
-  const favMods = mods.filter(m => favs.includes(m.mod_id));
+  //const favMods = mods.filter(m => favs.includes(m.mod_id));
+
+  //const favs = getFavorites(); // 获取收藏列表
+  // 确保最新收藏在最前面
+  favs.reverse(); // 如果 getFavorites 返回的是旧→新顺序
+
+  // 根据收藏顺序取 mod 对象,确保最新收藏在最前面
+  const favMods = favs
+  .map(id => mods.find(m => m.mod_id === id))
+  .filter(Boolean); // 过滤可能不存在的 mod
+  //更新收藏总数
+  document.getElementById("favCount").textContent = favs.length;
 
   if (favMods.length === 0) {
     list.innerHTML = "<li>暂无收藏</li>";
@@ -231,7 +242,7 @@ function renderFavoriteDrawer() {
     li.style.cursor = "pointer";
     li.style.padding = "8px 12px";
     li.style.borderBottom = "1px solid #eee";
-    li.innerHTML = `<span class="fav-index">${index + 1}.</span> 
+    li.innerHTML = `
     <span class="fav-title">${mod.name_cn || mod.title_en} (#${mod.mod_id})</span>
     <button class="nexus-btn" data-url="${mod.nexus_url}">N</button>
     `;
