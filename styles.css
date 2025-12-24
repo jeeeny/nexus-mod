@@ -72,6 +72,7 @@ body {
 #tagContainer {
   max-height: 50px;
   overflow-x: auto;
+  overflow-y: hidden;
   white-space: nowrap;
 }
 
@@ -80,8 +81,10 @@ body {
   margin-right: 5px;
 }
 
-
-
+/* 隐藏滚动条箭头 */
+#tagContainer ::-webkit-scrollbar-button {
+  display: none;
+}
 
 /* 缩略图 */
 .thumb {
