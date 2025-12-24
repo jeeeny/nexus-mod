@@ -7,7 +7,7 @@ body {
 
 /* ===== 外层容器container左边对齐 ===== */
 .container {
-  max-width: 1200px;
+  max-width: 1500px;
   margin: 0 auto;
   padding: 0 10px;
   box-sizing: border-box;
@@ -819,4 +819,33 @@ body {
   background: #ffffff;
   overflow: hidden;
   scrollbar-gutter: stable;
+}
+
+
+/* ===== tags：横向滚动但无箭头 ===== */
+#tags {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+#tags::-webkit-scrollbar {
+  height: 0;
+}
+
+#tags::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* ===== 卡片区：纵向滚动但无箭头 ===== */
+#modContainer {
+  scrollbar-width: none;
+}
+
+#modContainer::-webkit-scrollbar {
+  width: 0;
+}
+
+#modContainer::-webkit-scrollbar-button {
+  display: none;
 }
