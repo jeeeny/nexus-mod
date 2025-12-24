@@ -517,7 +517,6 @@ body {
 /*标签部分隐藏*/
 .tags {
   display: none;
-  overflow-y: hidden;
 }
 
 .nexus-link-text {
@@ -825,7 +824,6 @@ body {
 /* ===== tags：横向滚动但无箭头 ===== */
 #tags {
   overflow-x: auto;
-  overflow-y: hidden;
   scrollbar-width: none;
 }
 
