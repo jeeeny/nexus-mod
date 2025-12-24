@@ -34,9 +34,6 @@ body {
   position: relative; /* 绝对定位的参考容器 */
 }
 
-
-
-
 /* ===== 顶部控制区（冻结） ===== */
 #topControls {
   position: sticky;
@@ -53,10 +50,6 @@ body {
   border-bottom: none; /* 去掉底部灰线 */
   box-shadow: none;    /* 如果有阴影也去掉 */
 }
-
-
-
-
 
 /* 搜索框占满宽度，和 Mod 卡片左对齐 */
 #topControls input {
@@ -75,12 +68,6 @@ body {
 }
 
 
-
-
-
-
-
-
 /* 标签栏 */
 #tagContainer {
   max-height: 50px;
@@ -93,46 +80,6 @@ body {
   margin-right: 5px;
 }
 
-
-
-
-
-/* ===== Mod 卡片容器 ===== */
-/* #modContainer {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;                             
-  justify-content: flex-start;               
-  margin-top: 10px;
-  padding-bottom: 20px;
-} */
-
-/* ===== 非电脑设备：强制两列 ===== */
-/* @media (max-width: 1024px) {
-  #modContainer .mod-card {
-    flex: 0 0 calc(50% - 5px);
-  }
-}
-
-.mod-card {
-  /* 没有宽度限制 */
-/* }
-
-#modContainer.minimal h3 {
-  font-size: 1.1em;
-} */ 
-
-
-
-
-
-
-/* ===== 展开状态 ===== */
-/* .mod-card.expanded h3,
-.mod-card.expanded .mod-desc {
-  -webkit-line-clamp: unset;
-  overflow: visible;
-} */
 
 
 
@@ -176,15 +123,6 @@ body {
   cursor:pointer;
 }
 
-
-
-
-
-
-
-
-
-
 /* ===== 文本 ===== */
 .mod-card p {
   font-size: 13px;
@@ -194,23 +132,6 @@ body {
   overflow: hidden;
   text-overflow: ellipsis; */
 }
-
-/* 鼠标悬停显示完整内容 */
-/* .mod-card:hover .mod-desc {
-  display: block;
-  white-space: normal;
-} */
-
-/* .mod-card:hover {
-  transform: translateY(-4px);
-} */
-
-
-
-/* .mod-card:hover .mod-desc {
-  display: block;
-  white-space: normal;
-} */
 
 /* ===== 英文名 ===== */
 .mod-card h3 {
@@ -321,10 +242,6 @@ body {
   box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
   font-size: 14px;
 }
-
-
-
-
 
 .menu-btn {
   font-size: 22px;
@@ -525,9 +442,9 @@ body {
 } */
 
 
-
+/* 关闭按钮修改。关键：让 X 定位在侧边栏内部 */
 .side-drawer {
-  position: relative;   /* 关键：让 X 定位在侧边栏内部 */
+  position: relative;   
 }
 
 #drawerCloseBtn {
@@ -597,16 +514,10 @@ body {
   border-bottom: 1px solid #e0e0e0;
 }
 
-
-
-
-
-
-
-
 /*标签部分隐藏*/
 .tags {
   display: none;
+  overflow-y: hidden;
 }
 
 .nexus-link-text {
@@ -619,12 +530,6 @@ body {
   color: #ED974F;
   text-decoration: underline;
 }
-
-
-
-
-
-
 
 
 /* 顶部第一行：菜单 + 标题 */
@@ -665,9 +570,6 @@ body {
   border-color: #ff8c00;
   box-shadow: 0 1px 6px rgba(255, 140, 0, 0.35);
 }
-
-
-
 
 
 /* 缩略图 */
@@ -791,13 +693,82 @@ body {
   width: calc((100% - 10px - 20px) / 2);
   box-sizing: border-box;
 }
-@media (min-width: 1025px) {
+
+
+/* @media (min-width: 1025px) {
   #modContainer .mod-card {
     width: 188px;  /* 原始卡片宽度 */
-    flex: 0 0 188px;
+    /* flex: 0 0 188px;
     box-sizing: border-box;
   }
+} */ 
+
+/* iPad 竖屏 768px 以上 */
+@media (min-width: 768px) {
+  .mod-card {
+    flex: 1 1 calc(33.333% - 10px);
+    max-width: calc(33.333% - 10px);
+  }
 }
+
+/* 13寸笔记本 1024px 以上 */
+@media (min-width: 1024px) {
+  .mod-card {
+    flex: 1 1 calc(16.666% - 10px); /* 6列 */
+    max-width: calc(16.666% - 10px);
+  }
+}
+
+/* 大屏 1440px 以上 */
+@media (min-width: 1440px) {
+  .mod-card {
+    flex: 1 1 calc(14.285% - 10px); /* 7列 */
+    max-width: calc(14.285% - 10px);
+  }
+}
+
+/* 超大屏 1600px 以上 */
+@media (min-width: 1600px) {
+  .mod-card {
+    flex: 1 1 calc(12.5% - 10px); /* 8列 */
+    max-width: calc(12.5% - 10px);
+  }
+}
+
+
+/* 手机 2列，每行最后一个去掉右边间距 */
+.mod-card:nth-child(2n) {
+  margin-right: 0;
+}
+
+/* iPad 3列，每行最后一个去掉右边间距 */
+@media (min-width: 768px) {
+  .mod-card:nth-child(3n) {
+    margin-right: 0;
+  }
+}
+
+/* 13寸笔记本 6列 */
+@media (min-width: 1024px) {
+  .mod-card:nth-child(6n) {
+    margin-right: 0;
+  }
+}
+
+/* 大屏 7列 */
+@media (min-width: 1440px) {
+  .mod-card:nth-child(7n) {
+    margin-right: 0;
+  }
+}
+
+/* 超大屏 8列 */
+@media (min-width: 1600px) {
+  .mod-card:nth-child(8n) {
+    margin-right: 0;
+  }
+}
+
 /* .mod-card > * {
   width: 100%;
   box-sizing: border-box;
@@ -846,6 +817,6 @@ body {
   width: 100%;
   height: 100%;
   background: #ffffff;
-  /* overflow-x: hidden; */
+  overflow: hidden;
   scrollbar-gutter: stable;
 }
