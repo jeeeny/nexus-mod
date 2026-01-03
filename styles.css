@@ -68,23 +68,7 @@ body {
 }
 
 
-/* 标签栏 */
-#tagContainer {
-  max-height: 50px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  white-space: nowrap;
-}
 
-#tagContainer .tag-chip {
-  display: inline-block;
-  margin-right: 5px;
-}
-
-/* 隐藏滚动条箭头 */
-#tagContainer ::-webkit-scrollbar-button {
-  display: none;
-}
 
 /* 缩略图 */
 .thumb {
@@ -686,6 +670,7 @@ body {
   overflow-y: auto;
   align-content: flex-start;     /* 多行对齐，不拉满容器 */
   margin-top: 10px;
+  padding-bottom: 110px;
 }
 
 
@@ -790,21 +775,75 @@ body {
   border-bottom: 1px solid #e0e0e0; /* 灰线 */
 }
 
-/* topControls 与 tags 的间距 */
-#topControls {
-  margin-bottom: 4px; /* 搜索框和 tags 间距 */
-  background: #ffffff;
+/* 标签栏 */
+@media(max-width: 768px) {
+  #tagContainer {
+    max-height: 50px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch; /* 平滑滚动 */
+    white-space: nowrap;
+
+    margin-top: 0;      /* 去掉上方额外空白 */
+    margin-bottom: 4px; /* tags 和灰线间距 */
+
+    display: flex;      /* 👈 加这个 */
+    flex-wrap: nowrap;  /* 👈 明确禁止换行 */
+  }
+
+  #tagContainer .tag-chip {
+    display: inline-block;
+    margin-right: 5px;
+  }
+
+  /* 隐藏滚动条箭头 */
+  #tagContainer ::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  /* topControls 与 tags 的间距 */
+  #topControls {
+    margin-bottom: 4px; /* 搜索框和 tags 间距 */
+    background: #ffffff;
+  }
+  #tagContainer .tag-chip {
+    display: inline-block;
+    margin-right: 5px;
+  }
+
 }
 
-#tagContainer {
-  margin-top: 0;      /* 去掉上方额外空白 */
-  margin-bottom: 4px; /* tags 和灰线间距 */
+
+
+
+@media(min-width: 769px) {
+  /* ===== 标签栏 ===== */
+  #tagContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    max-height: 150px;          /* 两行高度（非常关键） */
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+    margin-bottom: 4px;
+  }
+
+  /* 展开状态 */
+  #tagContainer.expanded {
+    max-height: 1000px;        /* 足够大即可 */
+  }
+
+  /* 标签 */
+  #tagContainer .tag-chip {
+    line-height: 20px;
+    margin-bottom: 4px;
+  }
 }
 
-#tagContainer .tag-chip {
-  display: inline-block;
-  margin-right: 5px;
-}
+
+
+
+
 
 #sideDrawer h3,
 #drawerCloseBtn {

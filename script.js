@@ -154,6 +154,7 @@ if (searchInput) {
       (m.name_cn && m.name_cn.toLowerCase().includes(query)) ||
       ((m.mod_id + "").includes(query)) ||
       (m.summary && m.summary.toLowerCase().includes(query)) ||
+      (m.author && m.author.toLowerCase().includes(query)) ||
       parseTags(m.tags).some(tag => tag.toLowerCase().includes(query))
     );
     renderMods(filtered);
