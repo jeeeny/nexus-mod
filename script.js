@@ -42,7 +42,7 @@ function toggleFavorite(id) {
 
 /* ========= 加载 CSV ========= */
 async function loadMods() {
-  const res = await fetch("./data/mods.csv");
+  const res = await fetch("./data/mods2.csv");
   const text = await res.text();
   mods = parseCSV(text);
   renderMods(mods);
