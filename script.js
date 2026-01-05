@@ -25,6 +25,35 @@ function parseTags(tagString) {
     .filter(Boolean);
 }
 
+// ========= 更新我的收藏 tag 数量 =========
+function updateMyFavoritesTagCount() {
+  const favs = getFavorites();
+  const favChip = document.querySelector(".fav-chip");
+
+  if (favChip) {
+    // 已经存在 “我的收藏” tag → 更新数量
+    favChip.textContent = `⭐ 我的收藏 (${favs.length})`;
+  } else if (favs.length > 0) {
+    // 如果不存在，动态创建并加在“全部”之后
+    const container = document.getElementById("tagContainer");
+    const chip = document.createElement("span");
+    chip.className = "tag-chip fav-chip";
+    chip.textContent = `⭐ 我的收藏 (${favs.length})`;
+
+    chip.addEventListener("click", () => {
+      document.querySelectorAll(".tag-chip").forEach(c => c.classList.remove("active"));
+      chip.classList.add("active");
+      showingFavorites = true;
+      renderFavoriteCards();
+    });
+
+    // 插入在全部之后
+    const allChip = container.querySelector(".tag-chip.active") || container.firstChild;
+    if (allChip) allChip.after(chip);
+    else container.appendChild(chip);
+  }
+}
+
 /* ========= 收藏（localStorage） ========= */
 function getFavorites() {
   return JSON.parse(localStorage.getItem("favorites") || "[]");
@@ -39,6 +68,27 @@ function toggleFavorite(id) {
   }
   localStorage.setItem("favorites", JSON.stringify(favs));
 }
+//========= 主页面收藏列表 ========= */
+function renderFavoriteCards() {
+  const container = document.getElementById("modContainer");
+  container.innerHTML = "";
+
+  const favs = getFavorites();
+
+  if (favs.length === 0) {
+    container.innerHTML = "<p>暂无收藏</p>";
+    return;
+  }
+
+  // 按收藏顺序取 mod（和侧边栏一致）
+  const favMods = favs
+    .slice()        // 防止 reverse 影响原数组
+    .reverse()
+    .map(id => mods.find(m => m.mod_id === id))
+    .filter(Boolean);
+
+  renderMods(favMods,false);
+}
 
 /* ========= 加载 CSV ========= */
 async function loadMods() {
@@ -50,13 +100,16 @@ async function loadMods() {
 }
 
 /* ========= 渲染 Mod 卡片 ========= */
-function renderMods(list) {
+function renderMods(list, reverse = true) {
   const container = document.getElementById("modContainer");
   container.innerHTML = "";
 
+  // 普通卡片，按 CSV 最新在前
+  const displayList = reverse ? list.slice().reverse() : list.slice();
+
   const favorites = getFavorites();
 
-  list.forEach(mod => {
+  displayList.forEach(mod => {
     const tagsHTML = parseTags(mod.tags)
       .map(tag => `<span class="tag">#${tag}</span>`)
       .join("");
@@ -81,6 +134,8 @@ function renderMods(list) {
       <p class="mod-cn">中文名: ${mod.name_cn || "-"}</p>
       <p class="mod-author">作者: ${mod.author || "-"}</p>
       <p class="mod-desc">描述：${mod.summary_cn || "-"}</p>
+      <p class="mod-last_updated">最后更新: ${mod.last_updated || "-"}</p>
+      <p class="mod-mod_downloads">下载次数: ${mod.mod_downloads || "-"}</p>
       <p class="tags">标签：<span class="tag-list">${tagsHTML || "-"}</span></p>
       
     `;
@@ -93,18 +148,32 @@ function renderMods(list) {
 
   // 收藏按钮事件
   document.querySelectorAll(".fav-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      
       const id = btn.dataset.id;
       toggleFavorite(id);
+
+      
       btn.textContent = getFavorites().includes(id) ? "⭐" : "☆";
+      
+
+      renderFavoriteDrawer();
+      //renderTagChips();
+      //updateMyFavoritesTag(); 
+      updateMyFavoritesTagCount();
     });
-  });
+
+    });
 }
 
+/* ========= 标签统计 + 筛选 ========= */
 /* ========= 标签统计 + 筛选 ========= */
 function renderTagChips() {
   const tagCountMap = new Map();
 
+  // 统计所有普通标签数量
   mods.forEach(mod => {
     parseTags(mod.tags).forEach(tag => {
       tagCountMap.set(tag, (tagCountMap.get(tag) || 0) + 1);
@@ -114,6 +183,7 @@ function renderTagChips() {
   const container = document.getElementById("tagContainer");
   container.innerHTML = "";
 
+  // ===== 1️⃣ 全部 chip（固定第一个） =====
   const allChip = document.createElement("span");
   allChip.className = "tag-chip active";
   allChip.textContent = `全部 (${mods.length})`;
@@ -124,7 +194,29 @@ function renderTagChips() {
   });
   container.appendChild(allChip);
 
-  Array.from(tagCountMap.entries()).forEach(([tag, count]) => {
+  // ===== 2️⃣ 我的收藏 chip（固定第二个） =====
+  const favs = getFavorites();
+  let favChip = null;
+  if (favs.length > 0) {
+    favChip = document.createElement("span");
+    favChip.className = "tag-chip fav-chip";
+    favChip.textContent = `⭐ 我的收藏 (${favs.length})`;
+
+    favChip.addEventListener("click", () => {
+      document.querySelectorAll(".tag-chip").forEach(c => c.classList.remove("active"));
+      favChip.classList.add("active");
+      showingFavorites = true;
+      renderFavoriteCards();
+    });
+
+    container.appendChild(favChip);
+  }
+
+  // ===== 3️⃣ 其他标签按数量排序（数量多的在前） =====
+  const sortedTags = Array.from(tagCountMap.entries())
+    .sort((a, b) => b[1] - a[1]); // b[1] - a[1] 表示数量多的在前
+
+  sortedTags.forEach(([tag, count]) => {
     const chip = document.createElement("span");
     chip.className = "tag-chip";
     chip.textContent = `#${tag} (${count})`;
@@ -163,31 +255,31 @@ if (searchInput) {
 
 /* ========= 主页面收藏列表 ========= */
 let showingFavorites = false;
-function renderFavoriteList() {
-  const container = document.getElementById("modContainer");
-  container.innerHTML = "";
+// function renderFavoriteList() {
+//   const container = document.getElementById("modContainer");
+//   container.innerHTML = "";
 
-  const favs = getFavorites();
-  const favMods = mods.filter(m => favs.includes(m.mod_id));
+//   const favs = getFavorites();
+//   const favMods = mods.filter(m => favs.includes(m.mod_id));
 
-  if (favMods.length === 0) {
-    container.innerHTML = "<p>暂无收藏</p>";
-    return;
-  }
+//   if (favMods.length === 0) {
+//     container.innerHTML = "<p>暂无收藏</p>";
+//     return;
+//   }
 
-  favMods.forEach(mod => {
-    const div = document.createElement("div");
-    div.className = "fav-item";
-    div.textContent = `${mod.name_cn || mod.title_en} (#${mod.mod_id})`;
-    container.appendChild(div);
-  });
-}
+//   favMods.forEach(mod => {
+//     const div = document.createElement("div");
+//     div.className = "fav-item";
+//     div.textContent = `${mod.name_cn || mod.title_en} (#${mod.mod_id})`;
+//     container.appendChild(div);
+//   });
+// }
 
 document.getElementById("favToggleBtn")?.addEventListener("click", () => {
   showingFavorites = !showingFavorites;
 
   if (showingFavorites) {
-    renderFavoriteList();
+    renderFavoriteCards();
     document.getElementById("favToggleBtn").textContent = "⬅ 返回";
   } else {
     renderMods(mods);
