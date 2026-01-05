@@ -42,7 +42,7 @@ function toggleFavorite(id) {
 
 /* ========= 加载 CSV ========= */
 async function loadMods() {
-  const res = await fetch("./data/mods2.csv");
+  const res = await fetch("./data/mods3.csv");
   const text = await res.text();
   mods = parseCSV(text);
   renderMods(mods);
@@ -80,7 +80,7 @@ function renderMods(list) {
       <p class="mod-id">尾号: ${mod.mod_id || "-"}</p>
       <p class="mod-cn">中文名: ${mod.name_cn || "-"}</p>
       <p class="mod-author">作者: ${mod.author || "-"}</p>
-      <p class="mod-desc">描述：${mod.summary || "-"}</p>
+      <p class="mod-desc">描述：${mod.summary_cn || "-"}</p>
       <p class="tags">标签：<span class="tag-list">${tagsHTML || "-"}</span></p>
       
     `;
