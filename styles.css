@@ -112,8 +112,8 @@ body {
 
 /* ===== 文本 ===== */
 .mod-card p {
-  font-size: 12px;
-  margin: 3px 0;
+  font-size: 13px;
+  margin:1px 0;
 
   /* white-space: nowrap;
   overflow: hidden;
@@ -144,14 +144,7 @@ body {
   text-overflow: ellipsis;
 }
 
-/* ===== 描述 ===== */
-.mod-desc {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2; /* 显示两行 */
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+
 
 
 /* 收藏按钮 */
@@ -600,8 +593,17 @@ body {
 
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   overflow: hidden;
+}
+
+/* ===== 描述 ===== */
+.mod-desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* 显示两行 */
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 
