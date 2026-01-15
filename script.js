@@ -90,6 +90,97 @@ function renderFavoriteCards() {
   renderMods(favMods,false);
 }
 
+/* ========= 收藏折叠 ========= */
+const favHeader = document.getElementById("favHeader");
+const favList = document.getElementById("favoriteList");
+const favArrow = document.getElementById("favArrow");
+
+/* ========= 通用折叠 ========= */
+document.querySelectorAll(".drawer-header").forEach(header => {
+  header.addEventListener("click", () => {
+    const list = header.parentElement.querySelector(".drawer-list");
+    const arrow = header.querySelector(".drawer-arrow");
+    if (!list) return;
+    const isOpen = list.classList.toggle("open");
+    list.style.display = isOpen ? "block" : "none";
+    arrow.textContent = isOpen ? "▾" : "▸";
+  });
+
+  // 初始化显示
+  const list = header.parentElement.querySelector(".drawer-list");
+  if (list) list.style.display = "block";
+});
+
+/* ========= 加载韩网 ========= */
+
+async function loadKRSites() {
+  try {
+    const res = await fetch("./data/kr_sites.csv");
+    const text = await res.text();
+    const sites = parseCSV(text);
+
+    const list = document.getElementById("krList");
+    if (!list) return;
+
+    list.innerHTML = "";
+
+    const countEl = document.getElementById("krCount");
+    if (countEl) countEl.textContent = sites.length;
+
+    sites.forEach(site => {
+      if (!site.name || !site.url) return;
+
+      const li = document.createElement("li");
+      li.className = "drawer-item";
+
+      li.innerHTML = `
+        <span class="item-title">${site.name}</span>
+        <a href="${site.url}" target="_blank" class="kr-link">韩网</a>
+      `;
+
+      list.appendChild(li);
+    });
+
+  } catch (err) {
+    console.error("韩网加载失败", err);
+  }
+}
+/* ========= 加载网址导航 ========= */
+async function loadNavLinks() {
+  try {
+    const res = await fetch("./data/nav.json");
+    const items = await res.json(); // JSON 解析
+
+    const list = document.getElementById("navList");
+    if (!list) return;
+
+    list.innerHTML = "";
+
+    const countEl = document.getElementById("navCount");
+    if (countEl) countEl.textContent = items.length;
+
+    items.forEach(item => {
+      if (!item.name || !item.url) return;
+
+      const li = document.createElement("li");
+      li.className = "drawer-item nav-item";
+      li.innerHTML = `
+        <div class="item-title">
+          <a href="${item.url}" target="_blank">${item.name}</a>
+          ${item.desc ? `<div class="nav-desc">${item.desc}</div>` : ""}
+        </div>
+      `;
+      list.appendChild(li);
+    });
+
+    list.style.display = "block";   // 确保显示
+  } catch (err) {
+    console.error("加载网址导航失败", err);
+  }
+}
+
+
+
 /* ========= 加载 CSV ========= */
 async function loadMods() {
   const res = await fetch("./data/mods3.csv");
@@ -255,25 +346,7 @@ if (searchInput) {
 
 /* ========= 主页面收藏列表 ========= */
 let showingFavorites = false;
-// function renderFavoriteList() {
-//   const container = document.getElementById("modContainer");
-//   container.innerHTML = "";
 
-//   const favs = getFavorites();
-//   const favMods = mods.filter(m => favs.includes(m.mod_id));
-
-//   if (favMods.length === 0) {
-//     container.innerHTML = "<p>暂无收藏</p>";
-//     return;
-//   }
-
-//   favMods.forEach(mod => {
-//     const div = document.createElement("div");
-//     div.className = "fav-item";
-//     div.textContent = `${mod.name_cn || mod.title_en} (#${mod.mod_id})`;
-//     container.appendChild(div);
-//   });
-// }
 
 document.getElementById("favToggleBtn")?.addEventListener("click", () => {
   showingFavorites = !showingFavorites;
@@ -313,11 +386,9 @@ function renderFavoriteDrawer() {
   list.innerHTML = "";
 
   const favs = getFavorites();
-  //const favMods = mods.filter(m => favs.includes(m.mod_id));
 
-  //const favs = getFavorites(); // 获取收藏列表
-  // 确保最新收藏在最前面
-  favs.reverse(); // 如果 getFavorites 返回的是旧→新顺序
+  // 确保最新收藏在最前面，如果 getFavorites 返回的是旧→新顺序
+  favs.reverse(); 
 
   // 根据收藏顺序取 mod 对象,确保最新收藏在最前面
   const favMods = favs
@@ -370,8 +441,11 @@ function scrollToMod(id) {
 }
 
 
+/* ========= 初始化加载 ========= */
 
-/* ========= 初始化 ========= */
-document.addEventListener("DOMContentLoaded", () => {
-  loadMods();
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadMods();
+  await loadKRSites();
+  await loadNavLinks();
+  renderFavoriteDrawer();
 });

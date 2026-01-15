@@ -402,24 +402,6 @@ body {
   word-break: break-word;  /* 单词过长自动换行 */
 }
 
-/* ========= 侧边栏关闭按钮 ========= */
-/* #drawerCloseBtn {
-  padding: 8px 12px;
-  font-size: 14px;
-  font-weight: 500;
-  background: #f5f5f7;
-  border: none;
-  width: calc(100% - 30px);
-  margin: 0 15px 10px 15px;
-  border-radius: 8px;
-  cursor: pointer;
-  text-align: left;
-  transition: background-color 0.2s ease;
-}
-
-#drawerCloseBtn:hover {
-  background: #eaeaea;
-} */
 
 
 /* 关闭按钮修改。关键：让 X 定位在侧边栏内部 */
@@ -429,7 +411,7 @@ body {
 
 #drawerCloseBtn {
   position: absolute;
-  top: 12px;
+  top: 20px;
   right: 12px;
 
   width: 32px;
@@ -440,11 +422,11 @@ body {
   border-radius: 8px;
   background: transparent;
 
-  font-size: 14px;
+  font-size: 16px;
   line-height: 32px;
   text-align: center;
 
-  color: #666;
+  color: #333;
   cursor: pointer;
 
   transition: background-color 0.2s ease, color 0.2s ease;
@@ -578,11 +560,6 @@ body {
   line-height: 1;
 }
 
-/*点击卡片浮现该有的两行多行描述英文名*/
-/* .fav-btn:hover {
-  transform: scale(1.1);
-} */
-
 
 
 /* ===== 描述 ===== */
@@ -634,17 +611,6 @@ body {
   color: white;
 }
 
-
-
-/* 隐藏横向滚动条（但保留滑动能力） */
-/* .tag-bar::-webkit-scrollbar {
-  height: 0;
-} */
-/* 隐藏横向滚动条 */
-/* .tag-bar {
-  /* scrollbar-width: none; Firefox */
-  /* margin-top: 3px;
-} */ 
 
 .mod-tags {
   overflow-x: auto;
@@ -758,17 +724,6 @@ body {
   }
 }
 
-/* .mod-card > * {
-  width: 100%;
-  box-sizing: border-box;
-} */
-
-/* @media (max-width: 1024px) {
-  .mod-card {
-    flex: 0 0 calc(50% - 5px);
-    width: calc(50% - 5px);
-  }
-} */
 
 /* 统一重置 sticky 顶部容器内部间距 */
 #topControlsWrapper {
@@ -816,8 +771,6 @@ body {
 }
 
 
-
-
 @media(min-width: 769px) {
   /* ===== 标签栏 ===== */
   #tagContainer {
@@ -841,11 +794,6 @@ body {
     margin-bottom: 4px;
   }
 }
-
-
-
-
-
 
 #sideDrawer h3,
 #drawerCloseBtn {
@@ -890,4 +838,126 @@ body {
 
 #modContainer::-webkit-scrollbar-button {
   display: none;
+}
+
+.drawer-header {
+  cursor: pointer;
+  padding: 8px 12px;
+  font-weight: bold;
+  border-bottom: 1px solid #eee;
+}
+
+.drawer-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.drawer-arrow {
+  font-size: 30px;
+  transition: transform 0.2s ease;
+}
+
+
+.kr-link {
+  margin-left: 6px;
+  padding: 2px 6px;
+  background: #4caf50;
+  color: white;
+  border-radius: 4px;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+
+
+.drawer-item a {
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.drawer-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  padding: 5px 5px;
+  font-size: 15px;
+  border-bottom: 1px solid #f1f1f1;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  margin: 0;
+}
+
+.kr-link {
+  margin-left: 8px;
+  padding: 4px 6px;
+  background: #4caf50;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 13px;
+  text-decoration: none;
+  flex-shrink: 0;   /* ⭐ 防止被挤 */
+}
+
+.nav-item {
+  justify-content: flex-start; /* ✅ 和收藏左半边一致 */
+}
+
+.drawer-item:hover {
+  background-color: #f5f5f7;
+}
+
+/* 左侧文本 */
+.drawer-item .item-title {
+  flex: 1;
+  font-size: 15px;        /* ✅ 与 fav-title 完全一致 */
+  font-weight: 400;
+  line-height: 1.4;
+  word-break: break-word;
+  white-space: normal;
+}
+
+.nav-desc {
+  font-size: 12px;
+  color: #666;
+}
+.drawer-list {
+  max-height: 600px;   /* 和收藏一致即可 */
+  overflow-y: auto; /* 支持滚动 */
+}
+
+/* 可选：滚动条更细一点（WebKit） */
+.drawer-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.drawer-list::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.2);
+  border-radius: 3px;
+}
+
+#krList,
+#navList {
+  margin: 0;
+  padding: 5px;
+  list-style: none;
+}
+
+#navList a {
+  color: #333;
+  text-decoration: none;
+}
+
+#navList a:visited {
+  color: #333;
+}
+
+#navList a:hover {
+  color: #333;     /* Apple 蓝 / 或你喜欢的色 */
+  text-decoration: underline;
+}
+
+#navList a:active {
+  opacity: 0.7;
 }

@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Nexus Mods",
+    "desc": "N网主站",
+    "url": "https://www.nexusmods.com"
+  },
+  {
+    "name": "Nexus Mods app",
+    "desc": "【更新和管理mod】n网官方mod更新软件,支持 Windows、Linux 和 Steam Deck，macOS支持即将推出。",
+    "url": "https://www.nexusmods.com/site/mods/1164"
+  },
+  {
+    "name": "Vortex",
+    "desc": "【更新和管理mod】是由 Nexus Mods 开发的全新模组管理器。早期软件，支持很多游戏，支持 Windows",
+    "url": "https://www.nexusmods.com/site/mods/1"
+  },
+  {
+    "name": "Stardrop",
+    "desc": "【更新和管理mod】一款开源的星露谷物语模组管理器，支持 Windows",
+    "url": "https://www.nexusmods.com/stardewvalley/mods/10455"
+  },
+    {
+    "name": "小火管理器",
+    "desc": "【更新和管理mod】支持一键下载、更新、红字修复……支持Windows",
+    "url": "https://smallfire.cn/tools/fsvm-download"
+  },
+  {
+    "name": "在Windows上安装SMAPI",
+    "desc": "官方wiki教程",
+    "url": "https://zh.stardewvalleywiki.com/%E6%A8%A1%E7%BB%84:%E5%9C%A8Windows%E4%B8%8A%E5%AE%89%E8%A3%85SMAPI"
+  },
+  {
+    "name": "在Mac上安装SMAPI",
+    "desc": "官方wiki教程",
+    "url": "https://zh.stardewvalleywiki.com/%E6%A8%A1%E7%BB%84:%E5%9C%A8Mac%E4%B8%8A%E5%AE%89%E8%A3%85SMAPI"
+  },
+  {
+    "name": "在安卓上安装SMAPI",
+    "desc": "官方wiki教程",
+    "url": "https://zh.stardewvalleywiki.com/%E6%A8%A1%E7%BB%84:%E5%9C%A8Android%E4%B8%8A%E5%AE%89%E8%A3%85SMAPI"
+  },
+    {
+    "name": "星露谷物语官方维基",
+    "desc": "星露谷物语官方wiki",
+    "url": "https://zh.stardewvalleywiki.com/Stardew_Valley_Wiki"
+  },
+  {
+    "name": "农场地图规划",
+    "desc": "星露谷物语官方wiki",
+    "url": "https://stardew.info/planner/"
+  },
+    {
+    "name": "存档进度检查工具",
+    "desc": "星露谷物语官方wiki",
+    "url": "https://mouseypounds.github.io/stardew-checkup/"
+  },
+  {
+    "name": "作物利润计算",
+    "desc": "星露谷物语官方wiki",
+    "url": "https://thorinair.github.io/Stardew-Profits/#produce_0-equipment_0-sellRaw_false-sellExcess_false-aging_0-planted_1-maxSeedMoney_0-days_28-fertilizer_0-level_0-season_0-buySeed_false-replant_false-nextyear_false-buyFert_false-average_0-fertilizerSource_0-seeds_(pierre_true-joja_true-special_true)-skills_(till_false-agri_false-arti_false-gatherer_false-botanist_false)-foodIndex_0-foodLevel_0-extra_true-disableLinks_false-byHarvest_false-crossSeason_false-foragingLevel_0"
+  },
+  {
+    "name": "韩网博客",
+    "desc": "以codnjsdl8235老师为例，无需账号",
+    "url": "https://blog.naver.com/codnjsdl8235/222314151470"
+  },
+  {
+    "name": "韩网咖啡",
+    "desc": "韩网星露谷咖啡地址，需要账号",
+    "url": "https://m.cafe.naver.com/ca-fe/starvall"
+  }
+]

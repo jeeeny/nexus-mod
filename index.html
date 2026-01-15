@@ -9,12 +9,44 @@
 </head>
 
 <body>
-  <!-- 侧边栏 -->
+
   <div id="sideDrawer" class="side-drawer">
-    <h3>⭐ 收藏(<span id="favCount">0</span>)</h3>
-    <ul id="favoriteList" class="fav-list"></ul>
-    <button id="drawerCloseBtn">关闭</button>
-  </div>
+
+    <!-- ⭐ 收藏 -->
+    <div class="drawer-group">
+      <div class="drawer-header" data-target="fav">
+        <span class="drawer-title">
+          ⭐ 收藏 (<span id="favCount">0</span>)
+          <span class="drawer-arrow">▾</span>
+        </span>
+      </div>
+      <ul id="favoriteList" class="drawer-list open"></ul>
+    </div>
+
+    <!-- 🇰🇷 韩网 -->
+    <div class="drawer-group">
+      <div class="drawer-header" data-target="kr">
+        <span class="drawer-title">
+          🇰🇷 无需账号韩网mod(<span id="krCount">0</span>)
+          <span class="drawer-arrow">▾</span>
+        </span>
+      </div>
+      <ul id="krList" class="drawer-list open"></ul>
+    </div>
+
+    <!-- 🔗 网址导航 -->
+    <div class="drawer-group">
+      <div class="drawer-header" data-target="nav">
+        <span class="drawer-title">
+          🔗 网址导航(<span id="navCount">0</span>)
+          <span class="drawer-arrow">▾</span>
+        </span>
+      </div>
+      <ul id="navList" class="drawer-list open"></ul>
+    </div>
+
+    <button id="drawerCloseBtn" class="drawer-close">关闭</button>
+</div>
 
   <!-- 遮罩 -->
   <div id="drawerMask"></div>
